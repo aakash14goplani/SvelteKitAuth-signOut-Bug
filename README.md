@@ -6,4 +6,4 @@
 
 **Live Demo:** https://svelte-kit-auth-sign-out-bug.vercel.app/
 
-**GitHub issue URL:** 
+**GitHub issue URL:** https://github.com/nextauthjs/next-auth/issues/8134

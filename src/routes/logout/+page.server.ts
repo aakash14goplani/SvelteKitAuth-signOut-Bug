@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
 
-export const load = (async ({ fetch, locals }) => {
+export const load = (async ({ fetch, locals, url: _url }) => {
 	try {
 		const session = await locals.getSession();
 		if (session && !!session.user.access_token) {
@@ -10,6 +10,7 @@ export const load = (async ({ fetch, locals }) => {
 
 			const formDataAuthCore = new URLSearchParams();
 			formDataAuthCore.append('redirect', 'false');
+			formDataAuthCore.append('callbackUrl', `${_url.origin}`);
 			formDataAuthCore.append('csrfToken', csrfToken);
 	
 			await fetch('/auth/signout', {

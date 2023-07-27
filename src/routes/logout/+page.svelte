@@ -4,19 +4,11 @@
 
 	onMount(async () => {
 		const idToken = $page.data?.session?.user.id_token as string;
-
-		await fetch(
+		window.location.href =
 			import.meta.env.VITE_ISSUER +
-				`oidc/logout?post_logout_redirect_uri=${encodeURIComponent(
-					window.location.origin
-				)}&id_token_hint=${idToken}`,
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'
-				}
-			}
-		);
+			`oidc/logout?post_logout_redirect_uri=${encodeURIComponent(
+				window.location.origin
+			)}&id_token_hint=${idToken}`;
 	});
 </script>
 

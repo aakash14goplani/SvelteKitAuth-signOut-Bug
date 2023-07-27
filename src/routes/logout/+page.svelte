@@ -7,7 +7,9 @@
 
 		await fetch(
 			import.meta.env.VITE_ISSUER +
-				`oidc/logout?post_logout_redirect_uri=${window.location.origin}&id_token_hint=${idToken}`,
+				`oidc/logout?post_logout_redirect_uri=${encodeURIComponent(
+					window.location.origin
+				)}&id_token_hint=${idToken}`,
 			{
 				method: 'POST',
 				headers: {

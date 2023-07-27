@@ -1,5 +1,21 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+
+	onMount(async () => {
+		const idToken = $page.data?.session?.user.id_token as string;
+
+		await fetch(
+			import.meta.env.VITE_ISSUER +
+				`oidc/logout?post_logout_redirect_uri=${window.location.origin}&id_token_hint=${idToken}`,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				}
+			}
+		);
+	});
 </script>
 
 <div class="content">

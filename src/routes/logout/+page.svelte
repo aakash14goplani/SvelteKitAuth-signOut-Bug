@@ -1,5 +1,21 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+
+	onMount(() => {
+		const isAppReloaded = sessionStorage.getItem('reloadApp');
+		if (!isAppReloaded) {
+			sessionStorage.setItem('reloadApp', 'true');
+			window.location.reload();
+		}
+		if (!$page.data.session?.user.access_token) {
+			setTimeout(() => {
+				goto('/');
+				sessionStorage.removeItem('reloadApp');
+			}, 5000);
+		}
+	});
 </script>
 
 <div class="content">
@@ -16,16 +32,19 @@
 				<span>Unfortunately you're still signed in as</span>
 				<strong>{$page.data.session.user.email}</strong>
 				<strong>{$page.data.session.user.name}</strong>
+
+				<p>
+					Only way to log out now is to redirect to <a href="/">home page</a> and use client side signOut
+					button
+				</p>
+
+				<p>session object is NOT getting deleted on signout! - This flow DOES NOT works!!</p>
+			</div>
+		{:else}
+			<div class="signedin">
+				No Data available that means you're logged out. Redirecting you to home page...
 			</div>
 		{/if}
-	</p>
-
-	<p>
-		Only way to log out now is to redirect to <a href="/">home page</a> and use client side signOut button
-	</p>
-
-	<p>
-		session object is NOT getting deleted on signout! - This flow DOES NOT works!!
 	</p>
 </div>
 

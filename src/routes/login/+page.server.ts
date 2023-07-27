@@ -37,7 +37,7 @@ export const load = (async ({ fetch, locals, url: _url }) => {
 	}
 
 	if (url) {
-		console.log('Auto login user');
+		console.log('Auto login user: ', url);
 		throw redirect(302, url);
 	}
 }) satisfies PageServerLoad;

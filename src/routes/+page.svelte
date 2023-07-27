@@ -30,9 +30,7 @@
 		{/if}
 	</p>
 
-	<p>
-		next-auth.session-token cookie is getting deleted on logout! - This flow works fine!!
-	</p>
+	<p>next-auth.session-token cookie is getting deleted on logout! - This flow works fine!!</p>
 </div>
 
 <style lang="scss">

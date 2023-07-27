@@ -18,6 +18,15 @@ const config: SvelteKitAuthConfig = {
 	debug: true,
 	session: {
 		maxAge: 1800
+	},
+	callbacks: {
+		jwt({ account, token }) {
+			return { ...account, ...token };
+		},
+		session({ session, token }) {
+			session.user = { ...session.user, ...token };
+			return session;
+		},
 	}
 };
 
